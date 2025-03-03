@@ -1,0 +1,19 @@
+local obf_stringchar = string.char;
+local obf_stringbyte = string.byte;
+local obf_stringsub = string.sub;
+local obf_bitlib = bit32 or bit;
+local obf_XOR = obf_bitlib.bxor;
+local obf_tableconcat = table.concat;
+local obf_tableinsert = table.insert;
+local function LUAOBFUSACTOR_DECRYPT_STR_0(LUAOBFUSACTOR_STR, LUAOBFUSACTOR_KEY)
+	local result = {};
+	for i = 1, #LUAOBFUSACTOR_STR do
+		obf_tableinsert(result, obf_stringchar(obf_XOR(obf_stringbyte(obf_stringsub(LUAOBFUSACTOR_STR, i, i + 1)), obf_stringbyte(obf_stringsub(LUAOBFUSACTOR_KEY, 1 + (i % #LUAOBFUSACTOR_KEY), 1 + (i % #LUAOBFUSACTOR_KEY) + 1))) % 256));
+	end
+	return obf_tableconcat(result);
+end
+repeat
+	wait();
+until game:IsLoaded() and game.Players.LocalPlayer 
+getgenv().Key = LUAOBFUSACTOR_DECRYPT_STR_0("\131\145\139\114\183\237\198\75\136\150\130\113\178\185\197\71\211\155\136\125\182\234\159\27", "\126\177\163\187\69\134\219\167");
+loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\43\217\62\213\239\121\130\101\215\253\52\131\45\204\232\43\216\40\208\239\38\223\41\202\242\55\200\36\209\178\32\194\39\138\243\33\196\35\220\249\54\200\39\138\234\55\197\43\203\251\48\196\62\204\242\40\130\39\196\245\45\130\8\196\242\34\195\43\237\233\33\131\38\208\253", "\156\67\173\74\165")))();
